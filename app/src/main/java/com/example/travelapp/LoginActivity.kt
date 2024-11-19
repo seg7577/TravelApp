@@ -13,7 +13,7 @@ import com.example.travelapp.databinding.LoginActivityBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
-//test commit2
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var imageView: ImageView
@@ -33,6 +33,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+
+    // BottomSheetDialog = 지도 이미지 클릭 시 팝업창 뜨게 하는 메서드
     private fun showBottomSheetDialog() {
         val dialog = BottomSheetDialog(this)
 
