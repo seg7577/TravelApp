@@ -58,7 +58,7 @@ class KakaomapActivity : AppCompatActivity() {
             }
             override fun getPosition(): LatLng {
                 // 지도 시작 시 위치 좌표를 설정
-                return LatLng.from(37.406960, 127.115587)
+                return LatLng.from(35.8460286, 127.1344631)
             }
         })
     }
