@@ -13,7 +13,7 @@ import com.example.travelapp.databinding.LoginActivityBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
-//test commit
+//test commit2
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var imageView: ImageView
