@@ -5,5 +5,11 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.TravelApp" parent="Base.Theme.TravelApp" />
+    <style name="Theme.TravelApp" parent="Base.Theme.TravelApp">
+
+        <!-- 상태바 및 네비게이션 바 투명화 -->
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
 </resources>

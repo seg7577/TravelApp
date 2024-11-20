@@ -2,7 +2,11 @@ package com.example.travelapp
 
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelapp.databinding.ActivityMainBinding
@@ -15,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // 전체화면 모드 활성화
+        enableFullScreenMode()
+
 
         // recents 디렉토리 생성 코드
         val recentDir = File(getExternalFilesDir(null), "recents")
@@ -61,4 +69,27 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    private fun enableFullScreenMode() {
+        // 최신 API(R 이상)에서 WindowInsetsController 사용
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.apply {
+                // 상태바와 네비게이션 바 숨기기
+                hide(WindowInsets.Type.systemBars())
+                // 사용자 동작 후 다시 숨김
+                systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else {
+            // R 미만의 기기에서는 기존 방식 사용
+            @Suppress("DEPRECATION")
+            window.decorView.systemUiVisibility = (
+                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                            or View.SYSTEM_UI_FLAG_FULLSCREEN
+                            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    )
+        }
+    }
+
 }
