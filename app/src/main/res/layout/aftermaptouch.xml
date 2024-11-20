@@ -4,30 +4,62 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:paddingTop="10dp"
     android:paddingBottom="25dp">
-    <TextView
-        android:id="@+id/addpicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="사진 추가"/>
-    <TextView
-        android:id="@+id/navigation"
+    <!-- "사진 추가" 영역 -->
+    <LinearLayout
+        android:id="@+id/photo_add_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:text="블로그 작성"
-        android:textAlignment="center" />
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
 
-    <TextView
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/addpicture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="사진 추가"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <!-- "블로그 작성" 영역 -->
+    <LinearLayout
+        android:id="@+id/blog_write_area"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:text="맛집 검색"
-        android:textAlignment="center"/>
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+        <TextView
+            android:id="@+id/blog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="블로그 작성"
+            android:textSize="18sp"
+            android:gravity="center" />
+    </LinearLayout>
+    <!-- "맛집 검색" 영역 -->
+    <LinearLayout
+        android:id="@+id/find_restaurant_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+        <TextView
+            android:id="@+id/famousrestaurant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="맛집 검색"
+            android:textSize="18sp"
+            android:gravity="center" />
+    </LinearLayout>
 
 </LinearLayout>
