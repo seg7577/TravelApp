@@ -19,14 +19,16 @@
             android:name="com.kakao.sdk.KAKAO_MAP_KEY"
             android:value="KAKAO_MAP_KEY"/> <!-- 실제 키로 대체 -->
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 로딩 화면 -->
+        <activity android:name=".LoadingActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".KakaomapActivity"/>
