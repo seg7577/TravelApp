@@ -33,6 +33,6 @@
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".KakaomapActivity"/>
         <activity android:name=".SettingsActivity"/>
-    </application>
 
+    </application>
 </manifest>

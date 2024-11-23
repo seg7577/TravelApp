@@ -1,11 +1,11 @@
 package com.example.travelapp
-
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelapp.databinding.LoginActivityBinding
+import com.example.travelapp.SettingsActivity
 
 class LoginActivity : AppCompatActivity() {
 

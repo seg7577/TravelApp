@@ -1,3 +1,4 @@
+
 package com.example.travelapp
 
 import android.os.Bundle
@@ -53,8 +54,6 @@ class KakaomapActivity : AppCompatActivity() {
             override fun onMapReady(map: KakaoMap) {
                 // 정상적으로 인증이 완료되었을 때 호출
                 kakaoMap = map
-
-
             }
             override fun getPosition(): LatLng {
                 // 지도 시작 시 위치 좌표를 설정
@@ -66,3 +65,4 @@ class KakaomapActivity : AppCompatActivity() {
 
 
 }
+

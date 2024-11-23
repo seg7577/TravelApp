@@ -1,5 +1,6 @@
 package com.example.travelapp
 
+import java.io.File
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -41,23 +42,28 @@ class MainActivity : AppCompatActivity() {
                         finish() // 현재 액티비티 종료
                     } else {
                         // 로그인 실패
-                        Toast.makeText(this, "로그인 실패: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "로그인 실패: ${task.exception?.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         // 터미널에 오류 메시지 출력
                         Log.e("LoginError", "로그인 실패: $task.exception?.message")
                     }
                 }
-        }
 
-        // 회원가입 버튼 클릭 이벤트
-        binding.button2.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java) // 회원가입 화면으로 이동
-            startActivity(intent)
-        }
 
-        // 카카오맵 테스트 버튼 클릭 이벤트
-        binding.button4.setOnClickListener {
-            val intent = Intent(this, KakaomapActivity::class.java) // 카카오맵 화면으로 이동
-            startActivity(intent)
+            // 회원가입 버튼 클릭 이벤트
+            binding.button2.setOnClickListener {
+                val intent = Intent(this, RegisterActivity::class.java) // 회원가입 화면으로 이동
+                startActivity(intent)
+            }
+
+            // 카카오맵 테스트 버튼 클릭 이벤트
+            binding.button4.setOnClickListener {
+                val intent = Intent(this, KakaomapActivity::class.java) // 카카오맵 화면으로 이동
+                startActivity(intent)
+            }
         }
     }
 }

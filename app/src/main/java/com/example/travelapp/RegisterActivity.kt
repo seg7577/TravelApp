@@ -1,5 +1,6 @@
 package com.example.travelapp
 
+import com.example.travelapp.R
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -142,13 +143,22 @@ class RegisterActivity : AppCompatActivity() {
                                 finish()
                             }
                             .addOnFailureListener { e ->
-                                Toast.makeText(this, "Firestore 저장 실패: ${e.message}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    "Firestore 저장 실패: ${e.message}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                     } else {
                         // 사용자 등록 실패 시 오류 메시지 표시
-                        Toast.makeText(this, "회원가입 실패: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "회원가입 실패: ${task.exception?.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
+
         }
     }
 }
