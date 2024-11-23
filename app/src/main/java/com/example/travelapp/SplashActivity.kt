@@ -14,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_activity) // 스플래시 화면 레이아웃 설정
 
-        // 로고 ImageView를 가져오기
+        // 로고 ImageView를 가져오기asdasdasdsa
         val logoImageView = findViewById<ImageView>(R.id.logoImageView)
 
         // 초기 크기를 작게 설정 (시작 크기: 0.5배)
