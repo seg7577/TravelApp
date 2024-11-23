@@ -2,6 +2,7 @@ package com.example.travelapp
 //커밋용도
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelapp.databinding.KakaomapActivityBinding
 import com.kakao.vectormap.KakaoMap
@@ -10,6 +11,13 @@ import com.kakao.vectormap.KakaoMapSdk
 import com.kakao.vectormap.LatLng
 import com.kakao.vectormap.MapLifeCycleCallback
 import com.kakao.vectormap.MapView
+import com.kakao.vectormap.label.Label
+import com.kakao.vectormap.RoadViewRequest
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class KakaomapActivity : AppCompatActivity() {
 
@@ -62,6 +70,10 @@ class KakaomapActivity : AppCompatActivity() {
             }
         })
     }
+
+
+
+
 
 
 

@@ -14,6 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mapmap22" />
+        android:src="@drawable/administrative_divisions_map_of_south_korea" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

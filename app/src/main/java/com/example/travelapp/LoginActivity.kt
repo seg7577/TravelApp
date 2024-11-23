@@ -1,19 +1,21 @@
 package com.example.travelapp
 
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelapp.databinding.LoginActivityBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var imageView: ImageView
+    private var scaleFactor = 1.0f
+    private lateinit var scaleGestureDetector: ScaleGestureDetector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,15 +25,37 @@ class LoginActivity : AppCompatActivity() {
 
         imageView = binding.imageView8
 
+        // ScaleGestureDetector 초기화
+        scaleGestureDetector = ScaleGestureDetector(this, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+            override fun onScale(detector: ScaleGestureDetector): Boolean {
+                scaleFactor *= detector.scaleFactor
+
+                // 최소 및 최대 확대/축소 값 설정
+                scaleFactor = scaleFactor.coerceIn(0.5f, 5.0f)
+
+                imageView.scaleX = scaleFactor
+                imageView.scaleY = scaleFactor
+                return true
+            }
+        })
 
 
-        imageView.setOnClickListener {
+        // 터치이벤트랑 확대 축소하는 이벤트랑 동시 적용이 안돼서 일단 주석처리
+        // 일단 확대 축소 이벤트만 구현
+        // 확대하려면 ctrl누른 상태에서 지도 더블클릭+드래그
+        /*imageView.setOnClickListener {
             showBottomSheetDialog()
-        }
+        }*/
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        // ScaleGestureDetector에 이벤트 전달
+        scaleGestureDetector.onTouchEvent(event)
+        return true
     }
 
 
-    // BottomSheetDialog = 지도 이미지 클릭 시 팝업창 뜨게 하는 메서드
+    /*// BottomSheetDialog = 지도 이미지 클릭 시 팝업창 뜨게 하는 메서드
     private fun showBottomSheetDialog() {
         val dialog = BottomSheetDialog(this)
 
@@ -77,6 +101,6 @@ class LoginActivity : AppCompatActivity() {
             .create()
             .show()
 
-    }
+    }*/
 
 }

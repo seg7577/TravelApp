@@ -11,11 +11,12 @@
         android:id="@+id/photo_add_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:minHeight="48dp"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/addpicture"
@@ -30,36 +31,40 @@
         android:id="@+id/blog_write_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:minHeight="48dp"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
         <TextView
             android:id="@+id/blog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="블로그 작성"
-            android:textSize="18sp"
-            android:gravity="center" />
+            android:textSize="18sp" />
     </LinearLayout>
     <!-- "맛집 검색" 영역 -->
     <LinearLayout
         android:id="@+id/find_restaurant_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:minHeight="48dp"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
         <TextView
             android:id="@+id/famousrestaurant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="맛집 검색"
-            android:textSize="18sp"
-            android:gravity="center" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

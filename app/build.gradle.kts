@@ -24,6 +24,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "KAKAO_MAP_KEY", properties.getProperty("KAKAO_MAP_KEY"))
+        buildConfigField("String", "KAKAO_REST_API_KEY", properties.getProperty("KAKAO_REST_API_KEY"))
 
         ndk {
             abiFilters.add("arm64-v8a")
@@ -69,6 +70,11 @@ dependencies {
     // 카카오 SDK 추가
     implementation("com.kakao.sdk:v2-user:2.20.6") // 카카오 로그인 SDK
     implementation ("com.kakao.maps.open:android:2.12.8")
+
+    //카카오 REST API 호출용
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
 
     // 테스트 및 Android 테스트 라이브러리
     testImplementation("junit:junit:4.13.2")

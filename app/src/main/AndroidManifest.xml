@@ -19,6 +19,11 @@
         <meta-data
             android:name="com.kakao.sdk.KAKAO_MAP_KEY"
             android:value="KAKAO_MAP_KEY"/> <!-- 실제 키로 대체 -->
+
+        <meta-data
+            android:name="com.kakao.sdk.KAKAO_REST_API_KEY"
+            android:value="KAKAO_REST_API_KEY"/> <!-- 실제 키로 대체 -->
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
