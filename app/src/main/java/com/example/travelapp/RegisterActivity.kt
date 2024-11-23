@@ -11,14 +11,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import com.example.travelapp.databinding.RegisterActivityBinding
 
+import com.example.travelapp.databinding.RegisterActivityBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 class RegisterActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth // Firebase 인증 인스턴스
+    private lateinit var firestore: FirebaseFirestore // Firestore 인스턴스
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val dbHelper = DataBase(this)
+        auth = FirebaseAuth.getInstance() // Firebase 인증 초기화
+        firestore = FirebaseFirestore.getInstance() // Firestore 초기화
+
         val binding = RegisterActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -35,7 +42,7 @@ class RegisterActivity : AppCompatActivity() {
                 ConstraintLayout.LayoutParams.MATCH_PARENT,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT
             ).apply {
-                topMargin = 8 // 직접 dp 값을 px로 변환하는 유틸리티 함수가 필요하다면 구현 필요
+                topMargin = 8
             }
             text = "" // 초기에는 비어 있음
             setTextColor(Color.RED)
@@ -75,21 +82,15 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.Password.text.toString()
             val confirmPassword = binding.PasswordConfirm.text.toString()
 
-            // 이메일 중복 확인
-            if (dbHelper.checkEmailExists(email)) {
-                errorTextView.text = "이미 사용 중인 이메일입니다." // 이메일 중복 경고 메시지
-                return false
-            }
-
             // 비밀번호 일치 여부 확인
             if (password != confirmPassword) {
-                errorTextView.text = "비밀번호가 일치하지 않습니다." // 비밀번호 불일치 경고 메시지
+                errorTextView.text = "비밀번호가 일치하지 않습니다."
                 return false
             }
 
             // 모든 필드 유효성 검사
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                errorTextView.text = "모든 필드를 입력해주세요." // 필드 누락 경고 메시지
+                errorTextView.text = "모든 필드를 입력해주세요."
                 return false
             }
 
@@ -101,9 +102,8 @@ class RegisterActivity : AppCompatActivity() {
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.button3.isEnabled = validateInputs() // 입력값 유효성에 따라 버튼 활성화
+                binding.button3.isEnabled = validateInputs()
             }
-
             override fun afterTextChanged(s: Editable?) {}
         }
 
@@ -119,17 +119,36 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.EmailAddress.text.toString()
             val password = binding.Password.text.toString()
 
-            val result = dbHelper.addUser(name, email, password)
+            // Firebase Authentication으로 사용자 등록
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // 사용자 등록 성공 시 Firestore에 사용자 정보 저장
+                        val userId = auth.currentUser?.uid // Firebase가 생성한 사용자 UID
+                        val user = hashMapOf(
+                            "name" to name,
+                            "email" to email,
+                            "password" to password,
+                            "uid" to userId
+                        )
 
-            if (result != -1L) {
-                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                // 성공 시 메인 화면으로 이동
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
-            }
+                        firestore.collection("users").document(userId!!)
+                            .set(user)
+                            .addOnSuccessListener {
+                                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                                // 메인 화면으로 이동
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "Firestore 저장 실패: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    } else {
+                        // 사용자 등록 실패 시 오류 메시지 표시
+                        Toast.makeText(this, "회원가입 실패: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
     }
 }

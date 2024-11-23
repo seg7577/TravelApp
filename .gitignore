@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+emulator/
+emulator/lib64/qt/lib/libQt6WebEngineCoreAndroidEmu.6.5.3.dylib
