@@ -16,3 +16,4 @@ local.properties
 emulator/
 emulator/lib64/qt/lib/libQt6WebEngineCoreAndroidEmu.6.5.3.dylib
 app/travelapp-f519f-firebase-adminsdk-jovun-d352d48e7b.json
+app/google-services.json
