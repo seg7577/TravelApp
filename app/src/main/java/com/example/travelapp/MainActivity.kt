@@ -2,94 +2,65 @@ package com.example.travelapp
 
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.view.WindowInsets
-import android.view.WindowInsetsController
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelapp.databinding.ActivityMainBinding
-import java.io.File
+import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth // Firebase 인증 인스턴스
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 전체화면 모드 활성화
-        enableFullScreenMode()
-
-
-        // recents 디렉토리 생성 코드
-        val recentDir = File(getExternalFilesDir(null), "recents")
-        if (!recentDir.exists()) {
-            recentDir.mkdirs() // 디렉토리가 없으면 생성
-        }
-
-        // 데이터베이스 선언 - SQLite 사용
-        val dbHelper = DataBase(this)
+        // Firebase 인증 초기화
+        auth = FirebaseAuth.getInstance()
 
 
 
         binding.button.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            val email = binding.EmailAddress.text.toString()
-            val password = binding.Password.text.toString()
+            val email = binding.EmailAddress.text.toString().trim() // 이메일 입력값
+            val password = binding.Password.text.toString().trim() // 비밀번호 입력값
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            // 이메일과 비밀번호 확인
-            if (dbHelper.checkUser(email, password)) {
-                Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
+            // Firebase Authentication으로 로그인
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // 로그인 성공
+                        Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, LoginActivity::class.java) // 로그인 성공 후 이동할 화면
+                        startActivity(intent)
+                        finish() // 현재 액티비티 종료
+                    } else {
+                        // 로그인 실패
+                        Toast.makeText(this, "로그인 실패: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        // 터미널에 오류 메시지 출력
+                        Log.e("LoginError", "로그인 실패: $task.exception?.message")
+                    }
+                }
 
-                // 로그인이 성공하면 다음 화면으로 이동
-                val intent = Intent(this, LoginActivity::class.java)
+            binding.button2.setOnClickListener {
+                val intent = Intent(this, RegisterActivity::class.java) // 회원가입 화면으로 이동
                 startActivity(intent)
-                finish()
-
-            } else {
-
-                // 아니면 오류 메시지 출력하고 메인 화면 유지
-                Toast.makeText(this, "로그인 실패: 이메일 또는 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
-
             }
-        }
 
-        // 회원가입 버튼 클릭 이벤트
-        binding.button2.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-        }
-
-        // 카카오맵 테스트 버튼 클릭 이벤트
-        binding.button4.setOnClickListener {
-            val intent = Intent(this, KakaomapActivity::class.java)
-            startActivity(intent)
+            binding.button4.setOnClickListener {
+                val intent = Intent(this, KakaomapActivity::class.java) // 카카오맵 화면으로 이동
+                startActivity(intent)
+            }
         }
     }
 
-    private fun enableFullScreenMode() {
-        // 최신 API(R 이상)에서 WindowInsetsController 사용
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.apply {
-                // 상태바와 네비게이션 바 숨기기
-                hide(WindowInsets.Type.systemBars())
-                // 사용자 동작 후 다시 숨김
-                systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            }
-        } else {
-            // R 미만의 기기에서는 기존 방식 사용
-            @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility = (
-                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                            or View.SYSTEM_UI_FLAG_FULLSCREEN
-                            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    )
-        }
-    }
+
 
 }

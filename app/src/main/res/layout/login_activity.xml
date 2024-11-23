@@ -16,5 +16,20 @@
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/administrative_divisions_map_of_south_korea" />
 
+    <!-- 오른쪽 상단 설정 버튼 -->
+    <ImageButton
+        android:id="@+id/settingsButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="설정"
+        android:src="@drawable/logo_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
