@@ -4,6 +4,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 val properties = Properties().apply {
@@ -72,16 +73,12 @@ dependencies {
     implementation ("com.kakao.maps.open:android:2.12.8")
 
     // firebase sdk 추가
-    //implementation(libs.firebase.auth)
+
     implementation(platform("com.google.firebase:firebase-bom:32.0.0"))    // Firebase BoM을 추가하여 Firebase 라이브러리 버전을 관리
     implementation("com.google.firebase:firebase-firestore-ktx")            // Firebase Firestore SDK 추가
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
-
-
-    //카카오 REST API 호출용
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    //implementation(libs.firebase.auth)
 
 
     // 테스트 및 Android 테스트 라이브러리

@@ -25,9 +25,10 @@
         android:layout_marginTop="20dp"
         android:hint="이름을 입력하세요."
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/EmailAddress"
@@ -36,9 +37,10 @@
         android:layout_marginTop="20dp"
         android:hint="이메일을 입력하세요."
         android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/nameText"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
     <EditText
         android:id="@+id/Password"
@@ -47,9 +49,10 @@
         android:layout_marginTop="20dp"
         android:hint="비밀번호를 입력하세요."
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/EmailAddress"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/EmailAddress" />
 
     <EditText
         android:id="@+id/PasswordConfirm"
@@ -58,9 +61,10 @@
         android:layout_marginTop="20dp"
         android:hint="비밀번호를 다시 입력하세요."
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/Password"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/Password" />
 
     <Button
         android:id="@+id/button3"

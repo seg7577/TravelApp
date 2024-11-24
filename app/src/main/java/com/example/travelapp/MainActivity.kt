@@ -49,15 +49,16 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-            binding.button2.setOnClickListener {
-                val intent = Intent(this, RegisterActivity::class.java) // 회원가입 화면으로 이동
-                startActivity(intent)
-            }
 
-            binding.button4.setOnClickListener {
-                val intent = Intent(this, KakaomapActivity::class.java) // 카카오맵 화면으로 이동
-                startActivity(intent)
-            }
+        }
+        binding.button2.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java) // 회원가입 화면으로 이동
+            startActivity(intent)
+        }
+
+        binding.button4.setOnClickListener {
+            val intent = Intent(this, KakaomapActivity::class.java) // 카카오맵 화면으로 이동
+            startActivity(intent)
         }
     }
 

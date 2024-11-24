@@ -25,7 +25,7 @@
             android:value="KAKAO_REST_API_KEY"/> <!-- 실제 키로 대체 -->
 
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,9 +33,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoadingActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".KakaomapActivity"/>
+        <activity android:name=".SettingsActivity"/>
     </application>
 
 </manifest>
